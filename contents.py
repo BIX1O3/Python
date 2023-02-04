@@ -15,11 +15,17 @@ class File:
 bank = []
 
 for filename in os.listdir("."):
-	if filename.endswith(".py"):
+	if filename == "contents.py":
 		continue
 
-	with open(filename, "r") as file:
-		bank.append(File(filename, file.read()))
+	try:
+
+		with open(filename, "r") as file:
+			bank.append(File(filename, file.read()))
+
+
+	except (IsADirectoryError, PermissionError):
+		continue
 
 for file in bank:
 	file.printFile()
